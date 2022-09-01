@@ -4,9 +4,6 @@ include: 'https://raw.githubusercontent.com/Checkmarx/ci-cd-integrations/main/Gi
 variables:  
   CX_PROJECT_NAME: "$CI_PROJECT_PATH"
 
-default:
-  image: ubuntu:20.04
-
 stages:
   - build
   - test
