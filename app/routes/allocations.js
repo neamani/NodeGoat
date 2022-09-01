@@ -22,6 +22,7 @@ function AllocationsHandler(db) {
 
         allocationsDAO.getByUserIdAndThreshold(userId, threshold, (err, allocations) => {
             if (err) return next(err);
+            res.setHeader("Content-Security-Policy", "script-src 'self'");
             return res.render("allocations", {
                 userId,
                 allocations,
