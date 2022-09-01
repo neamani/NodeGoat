@@ -1,0 +1,37 @@
+include: 'https://raw.githubusercontent.com/Checkmarx/ci-cd-integrations/main/GitlabCICD/v1/CheckmarxCLI.gitlab-ci.yml'
+
+#You can check the options that better fit your use case in the documentation page, https://checkmarx.atlassian.net/wiki/spaces/AST/pages/3080194906/scan+create#Flags
+variables:  
+  CX_PROJECT_NAME: "$CI_PROJECT_PATH"
+
+default:
+  image: ubuntu:20.04
+  #
+  # This folder is cached between builds
+  # http://docs.gitlab.com/ee/ci/yaml/README.html#cache
+  cache:
+    paths:
+      - ~/.cache/pip/
+  before_script:
+    - apt -y update
+    - apt -y install apt-utils
+    - apt -y install net-tools python3.8 python3-pip 
+    - apt -y upgrade
+    - pip3 install -r requirements.txt
+
+stages:
+  - build
+  - test
+
+build_application:
+    stage: build
+    script:
+      - echo "Building application..."
+      - echo "Finishing Building application"
+
+E2ETest_application:
+    stage: test
+    script:
+      - echo "Testing application..."
+      - echo "Testing Building application"
+
