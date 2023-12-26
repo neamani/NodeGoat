@@ -1,0 +1,20 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  name: ido_local_host_pool
+
+steps:
+
+- task: Checkmarx AST@2
+  inputs:
+    CheckmarxService: 'ast_service_connection_2'
+    projectName: 'NodeGoat_from_ADO_Pipeline'
+    branchName: '$(Build.SourceBranchName)'
+    tenantName: 'cx_emea_se_ido_neamani'
+    additionalParams: '--scan-types sast,sca  --sast-incremental --debug --sca-rsolver "C:\playground\sca_resolver_win_new"'
